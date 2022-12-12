@@ -1,0 +1,39 @@
+{
+  "name": "Powertable",
+  "version": "1.0.0",
+  "description": "A conversion of @Muonw's Powertable component. Allows filtering, wildcard search, custom formatting and more!",
+  "license": "MIT",
+  "svelte": "index.js",
+  "module": "dist/plugin.min.js",
+  "scripts": {
+    "build": "rollup -c",
+    "watch": "rollup -cw"
+  },
+  "dependencies": {
+    "@crownframework/svelte-error-boundary": "^1.0.3",
+    "@muonw/powertable": "file:src/muonw2/powertable",
+    "@rollup/plugin-typescript": "^10.0.1",
+    "svelte": "^3.49.0"
+  },
+  "devDependencies": {
+    "@budibase/backend-core": "^2.0.13",
+    "@rollup/plugin-commonjs": "^18.0.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@tsconfig/svelte": "^3.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.2.10",
+    "rollup": "^2.44.0",
+    "rollup-plugin-copy2": "^0.3.1",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-polyfill-node": "^0.8.0",
+    "rollup-plugin-postcss": "^4.0.0",
+    "rollup-plugin-svelte": "^7.1.0",
+    "rollup-plugin-svg": "^2.0.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "sass": "^1.56.2",
+    "svelte-check": "^2.10.2",
+    "svelte-preprocess": "^5.0.0",
+    "tar": "^6.1.11",
+    "typescript": "^4.9.4"
+  }
+}

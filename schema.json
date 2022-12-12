@@ -1,0 +1,96 @@
+{
+  "type": "component",
+  "metadata": {},
+  "schema": {
+    "name": "Powertable",
+    "friendlyName": "Powertable",
+    "description": "A datatable credit to original creator here",
+    "icon": "Text",
+    "hasChildren": true,
+    "settings": [
+      {
+        "type": "dataProvider",
+        "label": "Data provider",
+        "key": "dataProvider",
+        "required": true
+      },
+      {
+        "type": "columns",
+        "label": "Columns",
+        "key": "columns",
+        "dependsOn": "dataProvider",
+        "nested": true
+      },
+      {
+        "type": "text",
+        "label": "No Data Text",
+        "key": "noDataText",
+        "defaultValue":"There is no data available."
+      },
+      {
+        "type": "boolean",
+        "key": "rowSelection",
+        "label": "Row Selection",
+        "defaultValue": false
+      },
+      {
+      "type": "select",
+      "label": "Rows Per Page",
+      "key": "rowsPerPage",
+      "options": [
+        10,20,30,40,50,60,70,80,90,100
+      ],
+      "defaultValue": 10
+    },
+    {
+      "type": "boolean",
+      "key": "headerText",
+      "label": "Show Header Text",
+      "defaultValue": true
+    },
+    {
+      "type": "boolean",
+      "key": "footerText",
+      "label": "Show Footer text",
+      "defaultValue": false
+    },
+    {
+      "type": "boolean",
+      "key": "headerFilters",
+      "label": "Show Headers Filters",
+      "defaultValue": true
+    },
+    {
+      "type": "boolean",
+      "key": "footerFilters",
+      "label": "Show Footer Filters",
+      "defaultValue": false
+    },
+    {
+      "type": "event",
+      "key": "onRowClick",
+      "label": "On Row Click"
+    },
+    {
+      "type": "event",
+      "key": "onRowDblClick",
+      "label": "On Row Double Click"
+    }
+    ],
+    "context": [
+      {
+        "type": "static",
+        "values": [
+          {
+            "label": "Active State",
+            "key": "isActive",
+            "type": "boolean",
+            "defaultValue": false
+          }
+        ]
+      }
+    ]
+  },
+  "hash": "2fa6a7a40edf2efe5743750b41e29a0abae3e032",
+  "version": "1.0.0"
+}
