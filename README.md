@@ -19,6 +19,10 @@ Find out more about [Budibase](https://github.com/Budibase/budibase).
 4. Configure Settings of the Power Table. Settings details can be found here (Powertable)[https://github.com/muonw/powertable]. Not all settings have been brought to this plugin.
 ![](assets/datatable_image.png)
 
+5) When Row Selection is turned on, the selected rows can be used through regular row bindings.
+![](assets/selectedrows.png)
+
+
 # Contributions Appreciated
 1. Contributing to the original project
 2. Bringing inline editing to Budibase (Most of the front end work has already been done by Muonw)
