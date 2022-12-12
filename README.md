@@ -12,12 +12,12 @@ Find out more about [Budibase](https://github.com/Budibase/budibase).
 1. Set up a Data Provider
 
 2. Select either a table or custom query as the source.
-![](assets/dataprovider_select.png)
+
 3. Add a PowerTable as a child component to the dataprovider.
 ![](assets/powertable_setup.png)
 
 4. Configure Settings of the Power Table. Settings details can be found here (Powertable)[https://github.com/muonw/powertable]. Not all settings have been brought to this plugin.
-![](assets/powertable_setup.png)
+![](assets/datatable_image.png)
 
 # Contributions Appreciated
 1. Contributing to the original project
