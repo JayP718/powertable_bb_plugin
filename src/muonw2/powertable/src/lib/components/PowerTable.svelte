@@ -875,8 +875,6 @@ onMount(async () => {
                                                                 <button data-name="item" on:click={selectAllAction}>Select All</button>
                                                                 <button data-name="item" on:click={selectNoneAction}>Select None</button>
                                                                 <button data-name="item" on:click={invertSelectionAction}>Invert Selection</button>
-                                                                <button data-name="item" on:click={addAction}>Add</button>
-                                                                <button data-name="item" on:click={deleteAction}>Delete</button>
                                                             </div>
                                                         </div>
                                                     </th>

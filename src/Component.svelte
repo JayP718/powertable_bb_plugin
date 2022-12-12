@@ -1,25 +1,18 @@
 <script>
   import { getContext, onDestroy } from "svelte";
-  //import { PowerTable } from "./muonw/powertable/src/lib/components/PowerTable.svelte";
-  //import "@muonw/powertable/powertable/package/dist/power-table.scss";
   import { PowerTable } from "./muonw2/powertable";
   import "./muonw2/powertable/package/styles/power-table.scss";
-  const { styleable, getAction, ActionTypes, routeStore, rowSelectionStore } =
+
+  const { styleable, rowSelectionStore } =
     getContext("sdk");
   const component = getContext("component");
   let selectedRows = [];
-
-  rowSelectionStore.subscribe((value) => {
-    console.log(value);
-  });
-
-  console.log(rowSelectionStore);
 
   $: {
     rowSelectionStore.actions.updateSelection(
       $component.id,
       selectedRows.length ? selectedRows[0].tableId : "",
-      selectedRows.map((row) => row._id)
+      selectedRows.map((row) => row)
     );
   }
 
@@ -40,8 +33,8 @@
   });
 
   const toggleSelectRow = (row) => {
-    console.log("test")
-    console.log(JSON.stringify(selectedRows))
+    console.log("test");
+    console.log(JSON.stringify(selectedRows));
     if (selectedRows.some((selectedRow) => selectedRow._id === row._id)) {
       selectedRows = selectedRows.filter(
         (selectedRow) => selectedRow._id !== row._id
@@ -51,15 +44,17 @@
     }
   };
 
-  $: dataContext = {
-    isActive,
-  };
 
-  let ptData = [
-    { id: 1, name: "Fay" },
-    { id: 2, name: "Luca" },
-  ];
-  $: ptData = dataProvider?.rows ?? [];
+  function uuid() {
+    return "cxxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      const v = c === "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+
+  $: ptData =
+    dataProvider?.rows.map((v) => (v._id ? v : { ...v, _id: uuid() })) ?? [];
 
   $: ptInstructs = modifyColumns(columns);
 
@@ -70,11 +65,9 @@
       newList.push(col);
       newList[i]["key"] = columns[i]["name"];
       newList[i]["title"] = columns[i]["name"];
-      columns[i]["key"] = columns[i]["name"];
+      columns[i]["key"] = columns[i]["name"]; 
       columns[i]["title"] = columns[i]["displayName"];
-      //delete columns[i]['name']
-      //delete columns[i]['displayName']
-      //delete columns[i]['id']
+
     }
 
     return newList;
@@ -94,11 +87,24 @@
     checkboxColumn: rowSelection,
   };
 
-  function handleMessage(event) {
-		alert("gotcha");
-	}
-  
-
+  function exportCsv() {
+    let json = ptData;
+    var fields = Object.keys(json[0]);
+    var replacer = function (key, value) {
+      return value === null ? "" : value;
+    };
+    var csv = json.map(function (row) {
+      return fields
+        .map(function (fieldName) {
+          return JSON.stringify(row[fieldName], replacer);
+        })
+        .join(",");
+    });
+    csv.unshift(fields.join(",")); // add header column
+    csv = csv.join("\r\n");
+    let csvContent = "data:text/csv;charset=utf-8," + csv;
+    window.open(csvContent);
+  }
 </script>
 
 <div use:styleable={$component.styles}>
@@ -113,7 +119,9 @@
     >
       <div slot="noResults">{noDataText}</div>
       <div slot="settings">
-        <button data-name="item">Export current data</button>
+        <button data-name="item" on:click={exportCsv}
+          >Export all data as CSV</button
+        >
       </div>
     </PowerTable>
     {selectedRows}
