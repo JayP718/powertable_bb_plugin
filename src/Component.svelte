@@ -33,8 +33,6 @@
   });
 
   const toggleSelectRow = (row) => {
-    console.log("test");
-    console.log(JSON.stringify(selectedRows));
     if (selectedRows.some((selectedRow) => selectedRow._id === row._id)) {
       selectedRows = selectedRows.filter(
         (selectedRow) => selectedRow._id !== row._id
