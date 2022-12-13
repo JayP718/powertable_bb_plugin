@@ -1,6 +1,6 @@
 {
   "name": "powertable",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A conversion of @Muonw's Powertable component. Allows filtering, wildcard search, custom formatting and more!",
   "license": "MIT",
   "svelte": "index.js",
