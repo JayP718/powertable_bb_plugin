@@ -55,6 +55,9 @@
 
   const modifyColumns = (columns) => {
     let newList = [];
+    if (!columns.length){
+      return []
+    } 
     for (var i = 0; i < columns.length; i++) {
       let col = { key: columns[i]["name"], title: columns[i]["displayName"] };
       newList.push(col);

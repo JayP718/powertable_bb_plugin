@@ -5,7 +5,7 @@
     "name": "powertable",
     "friendlyName": "Powertable",
     "description": "A datatable credit to original creator here",
-    "icon": "Text",
+    "icon": "Table",
     "hasChildren": true,
     "settings": [
       {
