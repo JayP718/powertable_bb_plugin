@@ -76,7 +76,7 @@
       pTable: ["table"],
       bottomBar: ["dropdown", "stats", "pagination"],
     },
-    rowsPerPageOptions: [1,10, 20 , 100, 200],
+    rowsPerPageOptions: [5,10, 20 , 100, 200],
     footerText: footerText,
     headerText: headerText,
     footerFilters: footerFilters,
