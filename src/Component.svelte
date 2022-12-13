@@ -3,8 +3,7 @@
   import { PowerTable } from "./muonw2/powertable";
   import "./muonw2/powertable/package/styles/power-table.scss";
 
-  const { styleable, rowSelectionStore } =
-    getContext("sdk");
+  const { styleable, rowSelectionStore } = getContext("sdk");
   const component = getContext("component");
   let selectedRows = [];
 
@@ -18,7 +17,6 @@
 
   export let dataProvider;
   export let columns;
-  export let isActive = false;
   export let rowSelection;
   export let headerText;
   export let footerText;
@@ -42,7 +40,6 @@
     }
   };
 
-
   function uuid() {
     return "cxxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g, (c) => {
       const r = (Math.random() * 16) | 0;
@@ -63,9 +60,8 @@
       newList.push(col);
       newList[i]["key"] = columns[i]["name"];
       newList[i]["title"] = columns[i]["name"];
-      columns[i]["key"] = columns[i]["name"]; 
+      columns[i]["key"] = columns[i]["name"];
       columns[i]["title"] = columns[i]["displayName"];
-
     }
 
     return newList;
@@ -77,7 +73,7 @@
       pTable: ["table"],
       bottomBar: ["dropdown", "stats", "pagination"],
     },
-    rowsPerPageOptions: [10, 100, 200],
+    rowsPerPageOptions: [1,10, 20 , 100, 200],
     footerText: footerText,
     headerText: headerText,
     footerFilters: footerFilters,
@@ -101,7 +97,13 @@
     csv.unshift(fields.join(",")); // add header column
     csv = csv.join("\r\n");
     let csvContent = "data:text/csv;charset=utf-8," + csv;
-    window.open(csvContent);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = csvContent;
+    downloadLink.download = "data.csv";
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   }
 </script>
 

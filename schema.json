@@ -2,7 +2,7 @@
   "type": "component",
   "metadata": {},
   "schema": {
-    "name": "Powertable",
+    "name": "powertable",
     "friendlyName": "Powertable",
     "description": "A datatable credit to original creator here",
     "icon": "Text",

@@ -521,21 +521,22 @@ function updatePageSize() {
     renderTable();
 }
 function manualRowEdit(e, index) {
-    let textareaEls = e.target.closest('tr')?.querySelectorAll('textarea[data-name=edit-textarea]');
-    textareaEls?.forEach(textarea => {
-        textarea.style.height = textarea.scrollHeight + 'px';
-    });
+    
+    // let textareaEls = e.target.closest('tr')?.querySelectorAll('textarea[data-name=edit-textarea]');
+    // textareaEls?.forEach(textarea => {
+    //     textarea.style.height = textarea.scrollHeight + 'px';
+    //});
 }
 function rowClicked(e, index) {
     dispatch('rowClicked', { event: e, data: pageData[index] });
-    if (e.target.dataset?.name === 'edit-submit') {
-        let textareaEls = e.target.closest('tr')?.querySelectorAll('textarea[data-name=edit-textarea]');
-        textareaEls.forEach(textareaEl => {
-            data[pageData[index][dataIdKey]][textareaEl?.dataset?.key ?? ''] = textareaEl?.value ?? '';
-        });
-        data[pageData[index][dataIdKey]][checkboxKey] = false;
-        initialize(instructs, options, data);
-    }
+    // if (e.target.dataset?.name === 'edit-submit') {
+    //     let textareaEls = e.target.closest('tr')?.querySelectorAll('textarea[data-name=edit-textarea]');
+    //     textareaEls.forEach(textareaEl => {
+    //         data[pageData[index][dataIdKey]][textareaEl?.dataset?.key ?? ''] = textareaEl?.value ?? '';
+    //     });
+    //     data[pageData[index][dataIdKey]][checkboxKey] = false;
+    //     initialize(instructs, options, data);
+    // }
 }
 
 
@@ -661,7 +662,6 @@ onMount(async () => {
 });
 </script>
 
-
 <div data-name="main-container" data-prefix="{options.uniquePrefix}" data-status={renderStatus}>
     {#each Object.entries(options.segments ?? {}) as [segment_name, segment_arr]}
         <div data-name={segment_name} data-type="segment">
@@ -744,25 +744,27 @@ onMount(async () => {
                                                 {#if specialInstructs.hasOwnProperty(instruct?.key)}
                                                     {#if instruct?.key === checkboxKey && options.checkboxColumn}
                                                         <td data-key={instruct.key}>
-                                                            <input type="checkbox" on:change={(e)=>checkBoxToggled(e, index)} />
+                                                            <input type="checkbox" bind:checked={data[record[dataIdKey]][checkboxKey]} on:change={(e)=>checkBoxToggled(e, index)} />
                                                         </td>
                                                     {/if}
                                                 {:else}
                                                     <td data-key={instruct.key}>
-                                                        {#if data[record[dataIdKey]]?.[checkboxKey]}
-                                                            <div data-name="edit-block">
+                                                       <!--  {#if data[record[dataIdKey]]?.[checkboxKey]}
+                                                              <div data-name="edit-block">
                                                                 <label>
-                                                                    <span>
+                                                                  <span>
                                                                         <span>{instruct.title}</span>
-                                                                    </span><textarea data-name="edit-textarea" data-key={instruct.key}>{data[record[dataIdKey]][instruct.key]}</textarea>
+                                                                    </span><textarea data-name="edit-textarea" data-key={instruct.key}>{data[record[dataIdKey]][instruct.key]}</textarea> 
                                                                 </label>
+                                                               
                                                                 <button data-name="edit-submit">✔️</button>
-                                                            </div>
+                                                            </div> 
                                                         {:else if instruct?.parseAs === 'unsafe-html'}
                                                             {@html (record[instruct.key] ?? '')}
                                                         {:else}
                                                             {(record[instruct.key] ?? '')}
-                                                        {/if}
+                                                        {/if}-->
+                                                        {(record[instruct.key] ?? '')}
                                                     </td>
                                                 {/if}
                                             {/each}
