@@ -60,6 +60,7 @@
       "label": "Show Headers Filters",
       "defaultValue": true
     },
+    
     {
       "type": "boolean",
       "key": "footerFilters",

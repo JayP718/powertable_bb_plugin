@@ -41,7 +41,7 @@
 	export let ptData = [];
 	let specialInstructs = {
 		[dataIdKey]: {
-			key:dataIdKey,
+			key: dataIdKey,
 			title: '',
 			sortable: false,
 			filterable: false
@@ -51,6 +51,7 @@
 			title: '',
 			sortable: false,
 			filterable: false
+		
 		}
 	};
 	const dispatch = createEventDispatcher();
@@ -236,7 +237,6 @@
 		}
 		applyPagination();
 		renderStatus = 'completed';
-		console.log('test');
 	}
 	function trackSorting(key) {
 		let newSortingState = options.sortOrder[sorting?.[key] ?? ''];
@@ -580,13 +580,11 @@
 	}
 
 	function checkBoxToggled(e, record) {
-		console.log(record._id)
 		if (selectedRows.some((selectedRow) => selectedRow._id == record._id)) {
 			selectedRows = selectedRows.filter((selectedRow) => selectedRow._id !== record._id);
 		} else {
 			selectedRows = [...selectedRows, record];
 		}
-
 	}
 
 	function rowDblClicked(e, index) {
@@ -635,11 +633,12 @@
 			return row;
 		});
 
-		$: {rowSelectionStore.actions.updateSelection(
-			$component.id,
-			selectedRows.length ? selectedRows[0].tableId : '',
-			data
-		);
+		$: {
+			rowSelectionStore.actions.updateSelection(
+				$component.id,
+				selectedRows.length ? selectedRows[0].tableId : '',
+				data
+			);
 		}
 		initialize(instructs, options, data);
 	}
@@ -675,7 +674,6 @@
 		});
 		data = [...data, emptyRow];
 		options.currentPage = Math.ceil(data.length / options?.rowsPerPage);
-		console.log('finishedadding');
 		initialize(instructs, options, data);
 	}
 	export function deleteAction(e) {
@@ -688,7 +686,6 @@
 	export function getData(removeMetadata = true) {
 		let exportData = JSON.parse(JSON.stringify(data));
 		let exportInstructs = JSON.parse(JSON.stringify(instructs));
-		console.log('getting data');
 		if (removeMetadata) {
 			exportData.map((row) => {
 				Object.keys(row).forEach((key) => {
@@ -707,7 +704,6 @@
 			search: searchObj,
 			filters: filterObj
 		};
-		console.log('done getting data');
 	}
 	onMount(async () => {
 		window.addEventListener('click', closePopUps);
@@ -828,40 +824,42 @@
 											on:dblclick={(e) => rowDblClicked(e, record)}
 										>
 											{#each instructs as instruct}
-
 												{#if specialInstructs.hasOwnProperty(instruct?.key)}
 													{#if instruct?.key === checkboxKey && options.checkboxColumn}
 														<td data-key={instruct.key}>
 															<input
 																type="checkbox"
-																bind:checked={data[data.findIndex(item => item.__PT_ID__ === record[dataIdKey])][checkboxKey]}
+																bind:checked={data[
+																	data.findIndex((item) => item.__PT_ID__ === record[dataIdKey])
+																][checkboxKey]}
 																on:change={(e) => checkBoxToggled(e, record)}
 															/>
 														</td>
 													{/if}
 												{:else}
 													<td data-key={instruct.key}>
-														 {#if data[record[dataIdKey]]?.[checkboxKey]}
-													  <div data-name="edit-block">
-														<label>
-														  <span>
-																<span>{instruct.title}</span>
-															</span><textarea data-name="edit-textarea" data-key={instruct.key}>{data[record[dataIdKey]][instruct.key]}</textarea> 
-														</label>
-													   
-														<button data-name="edit-submit">✔️</button>
-													</div> 
-												{:else if instruct?.parseAs === 'unsafe-html'}
-													{@html (record[instruct.key] ?? '')}
-												{:else}
-													{(record[instruct.key] ?? '')}
-												{/if}
-														{record[instruct.key] ?? ''}
+														<!-- {#if data[record[dataIdKey]]?.[checkboxKey]}
+															<div data-name="edit-block">
+																<label>
+																	<span>
+																		<span>{instruct.title}</span>
+																	</span><textarea data-name="edit-textarea" data-key={instruct.key}
+																		>{data[record[dataIdKey]][instruct.key]}</textarea
+																	>
+																</label>
+
+																<button data-name="edit-submit">✔️</button>
+															</div> -->
+														{#if instruct?.parseAs === 'unsafe-html'}
+															{@html (record[instruct.key] ?? '')}
+														{:else}
+															{record[instruct.key] ?? ''}
+														{/if}
 													</td>
 												{/if}
 											{/each}
 										</tr>
-									{/each} 
+									{/each}
 								{:else if renderStatus === 'completed'}
 									<tr>
 										<td data-name="noResults-td" colspan={instructs.length}>

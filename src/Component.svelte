@@ -46,7 +46,7 @@
 
   const modifyColumns = (columns) => {
     let newList = [];
-    if (!columns.length){
+    if (typeof(columns) == 'undefined'){
       return []
     } 
     for (var i = 0; i < columns.length; i++) {
