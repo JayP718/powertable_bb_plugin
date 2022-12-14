@@ -5,15 +5,15 @@
 
   const { styleable, rowSelectionStore } = getContext("sdk");
   const component = getContext("component");
-  let selectedRows = [];
+  // let selectedRows = [];
 
-  $: {
-    rowSelectionStore.actions.updateSelection(
-      $component.id,
-      selectedRows.length ? selectedRows[0].tableId : "",
-      selectedRows.map((row) => row)
-    );
-  }
+  // $: {
+  //   rowSelectionStore.actions.updateSelection(
+  //     $component.id,
+  //     selectedRows.length ? selectedRows[0].tableId : "",
+  //     selectedRows.map((row) => row)
+  //   );
+  // }
 
   export let dataProvider;
   export let columns;
@@ -30,15 +30,6 @@
     rowSelectionStore.actions.updateSelection($component.id, []);
   });
 
-  const toggleSelectRow = (row) => {
-    if (selectedRows.some((selectedRow) => selectedRow._id === row._id)) {
-      selectedRows = selectedRows.filter(
-        (selectedRow) => selectedRow._id !== row._id
-      );
-    } else {
-      selectedRows = [...selectedRows, row];
-    }
-  };
 
   function uuid() {
     return "cxxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g, (c) => {
@@ -118,7 +109,6 @@
       {ptOptions}
       on:rowClicked={onRowClick}
       on:rowDblClicked={onRowDblClick}
-      on:checkBoxToggled={(e) => toggleSelectRow(e.detail.data)}
     >
       <div slot="noResults">{noDataText}</div>
       <div slot="settings">
@@ -127,6 +117,5 @@
         >
       </div>
     </PowerTable>
-    {selectedRows}
   </div>
 </div>
