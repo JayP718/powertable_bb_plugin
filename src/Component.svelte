@@ -89,7 +89,7 @@
         .join(",");
     });
     csv.unshift(fields.join(",")); // add header column
-    csv = csv.join("\r\n");
+    csv = csv.join("\n");
     let csvContent = "data:text/csv;charset=utf-8," + csv;
     var downloadLink = document.createElement("a");
     downloadLink.href = csvContent;
