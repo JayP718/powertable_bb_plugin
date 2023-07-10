@@ -1,6 +1,6 @@
 {
   "name": "powertable",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "A conversion of @Muonw's Powertable component. Allows filtering, wildcard search, custom formatting and more!",
   "license": "MIT",
   "svelte": "index.js",
@@ -22,7 +22,7 @@
     "@tsconfig/svelte": "^3.0.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.2.10",
-    "rollup": "^2.44.0",
+    "rollup": "^2.79.1",
     "rollup-plugin-copy2": "^0.3.1",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-polyfill-node": "^0.8.0",
