@@ -75,62 +75,6 @@
     checkboxColumn: rowSelection,
   };
 
-/* function exportCsv() {
-  let json = ptData;
-  var fields = Object.keys(json[0]);
-
-  var idIndex = fields.indexOf('_id');
-  if (idIndex > -1) {
-    fields.splice(idIndex, 1);
-  }
-
-  var replacer = function (key, value) {
-    if (typeof value === "string") {
-      // Replace commas with semicolons in string values
-      value = value.replace(/,/g, ';');
-    }
-    return value === null ? "" : value;
-  };
-
-  var csv = json.map(function (row) {
-    return fields
-      .map(function (fieldName) {
-        return JSON.stringify(row[fieldName], replacer);
-      })
-      .join(",");
-  });
-  
-  // Log the csv array before joining with newlines
-  let csvArrayLogContent = "data:text/plain;charset=utf-8," + encodeURIComponent(JSON.stringify(csv, null, 2));
-  var downloadLink = document.createElement("a");
-  downloadLink.href = csvArrayLogContent;
-  downloadLink.download = "csvArrayLog.txt";
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-
-  csv.unshift(fields.join(","));
-  csv = csv.join("\n");
-
-  // Log the final csv string
-  let csvStringLogContent = "data:text/plain;charset=utf-8," + encodeURIComponent(csv);
-  downloadLink = document.createElement("a");
-  downloadLink.href = csvStringLogContent;
-  downloadLink.download = "csvStringLog.txt";
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-
-  let csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
-  downloadLink = document.createElement("a");
-  downloadLink.href = csvContent;
-  downloadLink.download = "data.csv";
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-}
- */
-
 function exportCsv() {
   let json = ptData;
   var fields = Object.keys(json[0]);
