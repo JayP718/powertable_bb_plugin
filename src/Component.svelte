@@ -75,36 +75,36 @@
     checkboxColumn: rowSelection,
   };
 
-function exportCsv() {
-  let json = ptData;
-  var fields = Object.keys(json[0]);
+  function exportCsv() {
+    let json = ptData;
+    var fields = Object.keys(json[0]);
 
-  var idIndex = fields.indexOf('_id');
-  if (idIndex > -1) {
-    fields.splice(idIndex, 1);
+    var idIndex = fields.indexOf('_id');
+    if (idIndex > -1) {
+      fields.splice(idIndex, 1);
+    }
+
+    var replacer = function (key, value) {
+      return value === null ? "" : value;
+    };
+    var csv = json.map(function (row) {
+      return fields
+        .map(function (fieldName) {
+          return JSON.stringify(row[fieldName], replacer);
+        })
+        .join(",");
+    });
+    csv.unshift(fields.join(",")); // add header column
+    csv = csv.join("\n");
+    let csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+    var downloadLink = document.createElement("a");
+    downloadLink.href = csvContent;
+    downloadLink.download = "data.csv";
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   }
-
-  var replacer = function (key, value) {
-    return value === null ? "" : value;
-  };
-  var csv = json.map(function (row) {
-    return fields
-      .map(function (fieldName) {
-        return JSON.stringify(row[fieldName], replacer);
-      })
-      .join(",");
-  });
-  csv.unshift(fields.join(",")); // add header column
-  csv = csv.join("\n");
-  let csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
-  var downloadLink = document.createElement("a");
-  downloadLink.href = csvContent;
-  downloadLink.download = "data.csv";
-
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-  document.body.removeChild(downloadLink);
-}
 
 </script>
 
