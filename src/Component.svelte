@@ -78,6 +78,12 @@
   function exportCsv() {
     let json = ptData;
     var fields = Object.keys(json[0]);
+
+    var idIndex = fields.indexOf('_id');
+    if (idIndex > -1) {
+      fields.splice(idIndex, 1);
+    }
+
     var replacer = function (key, value) {
       return value === null ? "" : value;
     };
@@ -89,8 +95,8 @@
         .join(",");
     });
     csv.unshift(fields.join(",")); // add header column
-    csv = csv.join("\r\n");
-    let csvContent = "data:text/csv;charset=utf-8," + csv;
+    csv = csv.join("\n");
+    let csvContent = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
     var downloadLink = document.createElement("a");
     downloadLink.href = csvContent;
     downloadLink.download = "data.csv";
@@ -99,6 +105,7 @@
     downloadLink.click();
     document.body.removeChild(downloadLink);
   }
+
 </script>
 
 <div use:styleable={$component.styles}>
